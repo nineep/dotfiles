@@ -23,9 +23,9 @@ set laststatus=2 "总是显示状态栏
 set ruler "显示光标位置
 set number "显示行号
 set cursorline "高亮显示当前行
-"set cursorcolumn "高亮显示当前列
+set cursorcolumn "高亮显示当前列
 set hlsearch "高亮显示搜索结果
-" set nowrap "禁止折行
+set nowrap "禁止折行
 set backspace=2 "回退键生效
 "set backspace=indent,eol,start
 
@@ -79,10 +79,10 @@ nmap <Leader>w :w<CR>
 nmap <Leader>W :w !sudo tee %<CR>
 
 " 定义快捷键保存所有窗口内容并退出 vim
-"nmap <Leader>WQ :wa<CR>:q<CR>
+nmap <Leader>WQ :wa<CR>:q<CR>
 
 " 不做任何保存，直接退出 vim
-"nmap <Leader>Q :qa!<CR>
+nmap <Leader>Q :qa!<CR>
 
 " 跳转至右方的窗口
 nnoremap <Leader>l <C-W>l
@@ -123,20 +123,24 @@ Plugin 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu�
 Plugin 'scrooloose/nerdtree' "文件浏览
 Plugin 'Valloric/YouCompleteMe' "自动补全
 Plugin 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发
-Plugin 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
+Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
 Plugin 'Lokaltog/vim-easymotion' "快速跳转，按两下leader键和f组合
+Plugin 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
 Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空白字符
 Plugin 'vim-scripts/indentpython.vim.git'
 Plugin 'vim-scripts/Solarized.git' "主题方案
-Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
-"Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
-"Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
-"Plugin 'vim-scripts/vimprj' "indexer 依赖
+Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+Plugin 'vim-scripts/vimprj' "indexer 依赖
+Plugin 'vim-scripts/Markdown' "Markdown语法高亮
 Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
-Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
-Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim' "Dockerfile语法高亮
 Plugin 'ConradIrwin/vim-bracketed-paste' " 使用bracketed-paste mode，粘贴代码时避免格式化
+"Plugin 'fatih/vim-go' "go语言语法高亮
+Plugin 'powerline/powerline'
+Plugin 'fholgado/minibufexpl.vim' "多文档编辑
+
 " 插件列表结束
 call vundle#end()
 filetype on
@@ -148,8 +152,9 @@ let g:Powerline_colorscheme='solarized256'
 
 
 " 设置tagbar
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边
-let tagbar_left=1
+" 设置 tagbar 子窗口的位置出现在主编辑区的右边
+"let tagbar_left=1
+let tagbar_right=1
 " " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
 nnoremap <Leader>t :TagbarToggle<CR>
 " " 设置标签子窗口的宽度
@@ -188,7 +193,7 @@ nmap <Leader>f :NERDTreeToggle<CR>
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
 " 设置NERDTree子窗口位置
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " NERDTree 子窗口中不显示冗余帮助信息
