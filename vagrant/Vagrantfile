@@ -12,7 +12,12 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "centos/7"
+  # 使用的box镜像名字
+  config.vm.box = "centos7.5"
+  # 虚拟机的主机名
+  config.vm.hostname = "centos75-161"
+  # vagrant定义的主机名，vagrant global-status 查询，区别vbox定义的vb.name
+  config.vm.define "centos75-161"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -38,25 +43,35 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
-  config.vm.network "public_network", ip: "172.23.119.5"
+  # 定义桥接网络的网卡
+  #config.vm.network "public_network", bridge: "eno1"
+  # 定义桥接网络的ip
+  config.vm.network "public_network", ip: "192.168.3.161", bridge: "eno1"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  # 同步目录设置，前面的路径是物理机代码的地址，后面的地址就是虚拟机的目录。
+  # 虚拟机的/vagrant目录默认挂载宿主机的开发目录(可以在进入虚拟机机后，使用df -h 查看)，这是在虚拟机启动时自动挂载的。
+  #config.vm.synced_folder "./data", "/vagrant_data"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
+  # vm provider的通用配置
   #   # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    vb.gui = false
   #   # Customize the amount of memory on the VM:
-    vb.memory = "4096"
-    vb.cpus = 4
-    vb.name = "centos7-04"
+    vb.memory = "16384"
+    vb.cpus = 8
+    # virtualbox 定义的主机名， vboxmanage list vms 查询
+    vb.name = "centos75161"
+  # vm provider的定制化配置
+
   end
   #
   # View the documentation for the provider you are using for more
